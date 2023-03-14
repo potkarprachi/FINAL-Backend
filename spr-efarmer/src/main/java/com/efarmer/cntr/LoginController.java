@@ -72,25 +72,40 @@ public class LoginController
 		System.out.println(user);
 		return loginService.update(user);
 	}
+		
+		@PostMapping("/userLogin")
+		public String authenticateAndGetToken(@RequestBody Login user)
+		{	
+			Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+			
+			if(authentication.isAuthenticated())
+			{
+				return jwtService.generateToken(user.getEmail());
+			}
+			else
+			{
+				throw new UsernameNotFoundException("Invalid Credentials");
+			}
+			/*
+			String username=user.getEmail();
+			System.out.println("inside controller"+username);*/
+			
+		}
 	
-	@PostMapping("/userLogin")
-	public String authenticateAndGetToken(@RequestBody Login user)
-	{	
-		Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+	@PostMapping("/forgotpassword")
+	public String passwordUpdate(@RequestBody Login user)
+	{     
 		
-		if(authentication.isAuthenticated())
-		{
-			return jwtService.generateToken(user.getEmail());
-		}
-		else
-		{
-			throw new UsernameNotFoundException("Invalid Credentials");
-		}
-		/*
-		String username=user.getEmail();
-		System.out.println("inside controller"+username);*/
-		
+		loginService.passwordUpdate(user.getEmail(),user.getPassword());
+	    return "Successfuly updated";	
 	}
+	
+	@PostMapping(value= {"/checkEmail"})
+	public Login getUserByEmail(@RequestBody Login user)
+	{
+		return loginService.checkEmail(user.getEmail());
+	}
+	
 }
 
 

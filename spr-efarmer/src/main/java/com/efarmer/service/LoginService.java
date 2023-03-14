@@ -9,4 +9,6 @@ public interface LoginService
 	Login getDetails(int id);
 	Login update(Login user);
 	Login getDetailsByEmail(String email);
+	String passwordUpdate(String email,String password);
+	Login checkEmail(String email);
 }

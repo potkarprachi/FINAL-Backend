@@ -12,9 +12,9 @@ import com.efarmer.model.Login;
 @Repository
 public interface LoginDao extends CrudRepository<Login,Integer>,JpaRepository<Login,Integer>
 {
-	@Query(value="SELECT * FROM login WHERE email= :email and password= :password", nativeQuery=true)
+	@Query(value="SELECT * FROM login WHERE email= :email", nativeQuery=true)
 //	@Query(value="SELECT  FROM login l WHERE l.farmer_name= :name AND l.farmer_password=:password", nativeQuery=true)
-	Login checkUser(@Param(value="email") String name,@Param(value="password") String password);
+	Login checkUser(@Param(value="email") String name);
 	
 	@Query(value="SELECT * FROM login WHERE id=:id",nativeQuery=true)
 	Login getInfo(@Param(value="id") int ID);
@@ -25,4 +25,7 @@ public interface LoginDao extends CrudRepository<Login,Integer>,JpaRepository<Lo
 	
 	@Query(value="SELECT * FROM login WHERE email=:email",nativeQuery=true)
 	Login getInfoByEmail(@Param(value="email") String email);
+	
+	@Query(value="SELECT * FROM login WHERE email LIKE :email",nativeQuery=true)
+	Login checkEmail(@Param(value="email") String email);
 }

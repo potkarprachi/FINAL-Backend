@@ -29,7 +29,7 @@ public class LoginServiceImpl implements LoginService
 	@Override
 	public Login check(Login user) 
 	{
-		Login cUser=loginDao.checkUser(user.getEmail(),user.getPassword());
+		Login cUser=loginDao.checkUser(user.getEmail());
 			return cUser;
 	}
 	
@@ -52,6 +52,25 @@ public class LoginServiceImpl implements LoginService
 	public Login getDetailsByEmail(String email) {
 		
 		Login cUser=loginDao.getInfoByEmail(email);
+		return cUser;
+	}
+	
+	@Override
+	public String passwordUpdate(String email,String password) {
+
+		 Login	cUsertemp  = loginDao.checkUser(email);
+		 System.out.println(cUsertemp.getPassword());
+		 System.out.println(cUsertemp.getEmail());
+		 cUsertemp.setPassword(passwordEncoder.encode(password));
+		 System.out.println(cUsertemp.getPassword());
+		 loginDao.save(cUsertemp);
+		 return "success";
+		       
+	}
+
+	@Override
+	public Login checkEmail(String email) {
+		Login cUser = loginDao.checkEmail(email);
 		return cUser;
 	}
 	
