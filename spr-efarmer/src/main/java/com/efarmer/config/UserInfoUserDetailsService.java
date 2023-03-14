@@ -1,5 +1,7 @@
 package com.efarmer.config;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,13 +25,13 @@ public class UserInfoUserDetailsService implements UserDetailsService
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
 	{	
 		System.out.println("userinfoservice"+email);
-		Login user=loginDao.checkUserByEmail(email);
+		Optional<Login> user=loginDao.findByEmail(email);
 		System.out.println("after userinfoservice"+user);
 		
 		//Login user = ( loginDao.checkUserByEmail(email)).orElseThrow(()->new UsernameNotFoundException("Invalid Email id"));
 	
 		
-		return new UserInfoUserDetails(user); 
+		return new UserInfoUserDetails(user.get()); 
 	}
 	
 	

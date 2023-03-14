@@ -28,7 +28,7 @@ private Login user;
 
 				@Override
 				public String getAuthority() {
-					return "Farmer";
+					return "ROLE_FARMER";
 				}
 			});
 		}else if(user.getRole().equals("customer"))
@@ -37,7 +37,7 @@ private Login user;
 
 				@Override
 				public String getAuthority() {
-					return "Customer";
+					return "ROLE_CUSTOMER";
 				}
 			});
 		}else
@@ -46,7 +46,7 @@ private Login user;
 
 				@Override
 				public String getAuthority() {
-					return "Adming";
+					return "ROLE_ADMIN";
 				}
 			});
 		}

@@ -26,13 +26,13 @@ public class CropStatusController
 	private CropStatusService cropStatusService;
 	
 	@PostMapping(value= {"/addCrop/{id}"})
-	@PreAuthorize("hasAuthority('Farmer')")
+
 	public void insertCrop(@RequestBody CropStatus crop,@PathVariable("id") int farmerid)
 	{
 		cropStatusService.insertCrop(crop);
 	}
 	@GetMapping(value = {"/getAllCropList/{id}"})
-	@PreAuthorize("hasAuthority('Farmer')")
+	
 	public List<CropStatus> getAllCropList(@PathVariable("id") int farmerid)
 	{
 		
@@ -40,14 +40,14 @@ public class CropStatusController
 	}
 	
 	@PutMapping(value = {"/updateStatusCrop/{oid}"})
-	@PreAuthorize("hasAuthority('Farmer')")
+	
 	public Integer canccelSell(@PathVariable("oid") int id)
 	{
 		return cropStatusService.cancelCS(id,"Cancelled");
 	}
 
 	@PutMapping(value = {"/updateStatusByAdmin/{oid}/{status}"})
-	@PreAuthorize("hasAuthority('Admin')")
+	
 	public Integer updateStatus(@PathVariable("oid") int id,@PathVariable("status") String status)
 	{
 		System.out.println(status);
@@ -55,7 +55,7 @@ public class CropStatusController
 	}
 	
 	@GetMapping(value = {"/getAllCrops"})
-	@PreAuthorize("hasAuthority('Customer')")
+
 	public List<CropStatus> getAllCrops()
 	{
 		return cropStatusService.getAllCrops("Pending");

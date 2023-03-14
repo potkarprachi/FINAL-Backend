@@ -1,5 +1,7 @@
 package com.efarmer.dao;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -28,4 +30,6 @@ public interface LoginDao extends CrudRepository<Login,Integer>,JpaRepository<Lo
 	
 	@Query(value="SELECT * FROM login WHERE email LIKE :email",nativeQuery=true)
 	Login checkEmail(@Param(value="email") String email);
+	
+	Optional<Login> findByEmail(@Param(value="email") String name);
 }
