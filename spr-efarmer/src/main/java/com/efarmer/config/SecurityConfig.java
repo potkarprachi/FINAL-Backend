@@ -42,10 +42,10 @@ public class SecurityConfig
 	{
 		return http.csrf().disable()
 				   .authorizeHttpRequests()
-				   .antMatchers("/userLogin","/userAdd","/userquery").permitAll()
+				   .antMatchers("/userAdd","/userLogin1","/getAccDetails/{id}","/getAccDetailbyemail/{email}","/updateAccDetails","/userLogin","/addDistrict","/getDistrict","/getDistrict/{id}","/addCrop/{id}","/getAllCropList/{id}","/updateStatusCrop/{oid}","/updateStatusByAdmin/{oid}/{status}","/getAllCrops","/menuPage","/getCropDetails/{id}","/addTransaction","/getAllTransactions1","/getAllTransactionFarmer/{id}","/getAllTransactionCust/{id}","/userquery","/getqueries").permitAll()
 				   .and()
 				   .authorizeHttpRequests()
-				   .antMatchers("/addCrop/{id}").authenticated()
+				   .antMatchers().authenticated()
 				   .and().sessionManagement()
 				   .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				   .and()
